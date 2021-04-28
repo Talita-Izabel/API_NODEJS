@@ -63,7 +63,7 @@ router.post('/authenticate', async (req, res) => {
 
 router.post('/forgot_password', async(req, res) => {
   const { email } = req.body;
-  
+
   try{
     const user = await User.findOne({ email });
 
@@ -87,12 +87,12 @@ router.post('/forgot_password', async(req, res) => {
       from: 'talitazbl@gmail.com', 
       template: 'auth/forgot_password',
       context: { token },
-    }), (err) => {
+    }, (err) => {
       if(err)
         return res.status(400).send({ error: 'Cannot send forgot password email'});
 
       return res.send();
-    }
+    })
   } catch(err){
     res.status(400).send({ error: 'Erro on forgot password, try again' });
   }
